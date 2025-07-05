@@ -9,13 +9,280 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
-      [_ in never]: never
+      ai_logs: {
+        Row: {
+          created_at: string | null
+          id: string
+          interaction_type: string | null
+          interaction_value: Json | null
+          user_id: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          id?: string
+          interaction_type?: string | null
+          interaction_value?: Json | null
+          user_id?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          id?: string
+          interaction_type?: string | null
+          interaction_value?: Json | null
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "ai_logs_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      badges: {
+        Row: {
+          criteria: Json | null
+          description: string | null
+          id: string
+          name: string | null
+        }
+        Insert: {
+          criteria?: Json | null
+          description?: string | null
+          id?: string
+          name?: string | null
+        }
+        Update: {
+          criteria?: Json | null
+          description?: string | null
+          id?: string
+          name?: string | null
+        }
+        Relationships: []
+      }
+      breath_sessions: {
+        Row: {
+          completed_at: string | null
+          duration_seconds: number | null
+          id: string
+          technique_id: string | null
+          user_id: string | null
+        }
+        Insert: {
+          completed_at?: string | null
+          duration_seconds?: number | null
+          id?: string
+          technique_id?: string | null
+          user_id?: string | null
+        }
+        Update: {
+          completed_at?: string | null
+          duration_seconds?: number | null
+          id?: string
+          technique_id?: string | null
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "breath_sessions_technique_id_fkey"
+            columns: ["technique_id"]
+            isOneToOne: false
+            referencedRelation: "techniques"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "breath_sessions_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      habit_reminders: {
+        Row: {
+          active: boolean | null
+          channel: string | null
+          id: string
+          override_until: string | null
+          time_of_day: string | null
+          user_id: string | null
+        }
+        Insert: {
+          active?: boolean | null
+          channel?: string | null
+          id?: string
+          override_until?: string | null
+          time_of_day?: string | null
+          user_id?: string | null
+        }
+        Update: {
+          active?: boolean | null
+          channel?: string | null
+          id?: string
+          override_until?: string | null
+          time_of_day?: string | null
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "habit_reminders_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      journal_entries: {
+        Row: {
+          created_at: string | null
+          id: string
+          mood: string | null
+          notes: string | null
+          technique_id: string | null
+          user_id: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          id?: string
+          mood?: string | null
+          notes?: string | null
+          technique_id?: string | null
+          user_id?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          id?: string
+          mood?: string | null
+          notes?: string | null
+          technique_id?: string | null
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "journal_entries_technique_id_fkey"
+            columns: ["technique_id"]
+            isOneToOne: false
+            referencedRelation: "techniques"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "journal_entries_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      techniques: {
+        Row: {
+          description: string | null
+          exhale_seconds: number | null
+          hold_seconds: number | null
+          id: string
+          inhale_seconds: number | null
+          name: string
+          pain_point: string | null
+        }
+        Insert: {
+          description?: string | null
+          exhale_seconds?: number | null
+          hold_seconds?: number | null
+          id?: string
+          inhale_seconds?: number | null
+          name: string
+          pain_point?: string | null
+        }
+        Update: {
+          description?: string | null
+          exhale_seconds?: number | null
+          hold_seconds?: number | null
+          id?: string
+          inhale_seconds?: number | null
+          name?: string
+          pain_point?: string | null
+        }
+        Relationships: []
+      }
+      user_badges: {
+        Row: {
+          badge_id: string | null
+          earned_at: string | null
+          id: string
+          user_id: string | null
+        }
+        Insert: {
+          badge_id?: string | null
+          earned_at?: string | null
+          id?: string
+          user_id?: string | null
+        }
+        Update: {
+          badge_id?: string | null
+          earned_at?: string | null
+          id?: string
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "user_badges_badge_id_fkey"
+            columns: ["badge_id"]
+            isOneToOne: false
+            referencedRelation: "badges"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "user_badges_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      users: {
+        Row: {
+          created_at: string | null
+          display_name: string | null
+          id: string
+        }
+        Insert: {
+          created_at?: string | null
+          display_name?: string | null
+          id: string
+        }
+        Update: {
+          created_at?: string | null
+          display_name?: string | null
+          id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      award_badge_if_earned: {
+        Args: { user_id: string; technique_id: string }
+        Returns: undefined
+      }
+      log_session_and_check_streak: {
+        Args: { user_id: string }
+        Returns: undefined
+      }
+      pause_reminders: {
+        Args: { user_id: string; duration_minutes: number }
+        Returns: undefined
+      }
+      update_personalization_model: {
+        Args: { user_id: string }
+        Returns: undefined
+      }
     }
     Enums: {
       [_ in never]: never
